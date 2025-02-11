@@ -1,1 +1,1 @@
-# ros2_bot
+# ROS 2 humble bot
