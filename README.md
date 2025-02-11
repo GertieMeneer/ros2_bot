@@ -1,4 +1,4 @@
-# ROS 2 humble bot
+# ROS2 Humble bot
 
 Schoolproject made by Stef & Gert-Jan
 
