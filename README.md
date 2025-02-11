@@ -3,3 +3,6 @@
 Schoolproject made by Stef & Gert-Jan
 
 Idea: Bot with lidar scanner will drive in a room to map the room as a 3D map
+
+ROS 2 humble installed on: https://releases.ubuntu.com/jammy/
+Instructions followed: https://docs.ros.org/en/humble/
