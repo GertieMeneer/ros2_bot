@@ -9,7 +9,7 @@ Instructions followed for setting up VM in VirtualBox:
 2. Install VirtualBox Extension Pack https://www.virtualbox.org/wiki/Downloads
 3. Download Ubuntu ISO 22.04.5 LTS https://ubuntu.com/download/desktop
 4. Create new VirtualBox VM
-5. Set RAM to 4096GB
+5. Set RAM to 8192 MB
 6. Set CPU cores to max available
 7. Turn on Windows Hypervisor Platform under Windows Features
 8. Boot Ubuntu VM
