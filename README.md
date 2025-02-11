@@ -9,7 +9,7 @@ Instructions followed: https://docs.ros.org/en/humble/ <br>
 
 Instructions followed for WSL:
 1. Install WSL (```wsl --install```)
-2. Install Ubuntu-22.04 (```wsl --install --d Ubuntu-22.04
+2. Install Ubuntu-22.04 (```wsl --install --d Ubuntu-22.04```)
 3. Setup user account: input UNIX username, input and repeat password
 4. Then follow https://docs.ros.org/en/humble/
 
