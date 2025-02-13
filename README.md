@@ -29,3 +29,12 @@ Documentation used: https://docs.ros.org/en/eloquent/Tutorials/Creating-Your-Fir
 1. Create a ROS2 Humble workspace: ```mkdir ros_project/src```
 2. Go into ROS2 Humble workspace: ```cd ros_project/src```
 3. Create a ROS2 package: ```ros2 pkg create --build-type ament_cmake ros_project```
+
+## Testing the bot
+Documentation used: https://emanual.robotis.com/docs/en/platform/turtlebot3/sbc_setup/#sbc-setup & https://emanual.robotis.com/docs/en/platform/turtlebot3/opencr_setup/#opencr-setup & https://emanual.robotis.com/docs/en/platform/turtlebot3/bringup/#bringup & https://emanual.robotis.com/docs/en/platform/turtlebot3/basic_operation/#teleoperation
+1. Login to the bot by typing ```ssh turtle@<ip-address>``` into a terminal while being on the same network as the bot
+2. Run ```export TURTLEBOT3_MODEL=burger```
+3. Run ```export LDS_MODEL=LDS-01```
+4. Run ```ros2 launch turtlebot3_bringup robot.launch.py```
+5. Open another terminal and repeat step 1, 2, 3
+6. Run ```ros2 run turtlebot3_teleop teleop_keyboard```
