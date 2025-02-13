@@ -2,7 +2,7 @@
 
 Schoolproject made by Stef & Gert-Jan
 
-Idea: bot with lidar scanner will drive in a room to map the room as a 3D map
+Idea: bot with lidar scanner will drive in a room to map the room as a 2D map
 
 Instructions followed for setting up VM in VirtualBox:
 1. Install VirtualBox: https://www.virtualbox.org/wiki/Downloads
