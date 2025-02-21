@@ -2,7 +2,7 @@
 
 Schoolproject made by Stef & Gert-Jan
 
-Idea: bot with lidar scanner will drive in a room to map the room as a 2D map
+Idea: bot with lidar scanner will drive in a room while measuring the amount of light using a LDR. After the mapping, it will find the brightest spot in the room, and use LED's to show how close it is to that spot.
 
 ## Setting up local ROS2 Humble development environment
 #### Instructions followed for setting up VM in VirtualBox:
