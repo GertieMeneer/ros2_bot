@@ -61,3 +61,6 @@ Followed [this](https://docs.ros.org/en/eloquent/Tutorials/Creating-Your-First-R
 5. Open another terminal and repeat step 1, 2, 3
 6. Run ```ros2 run turtlebot3_teleop teleop_keyboard```
 7. Control the bot using keys WASDX
+
+## How to see lidar data in Rviz on computer from bot
+TODO
