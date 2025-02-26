@@ -63,4 +63,6 @@ Followed [this](https://docs.ros.org/en/eloquent/Tutorials/Creating-Your-First-R
 7. Control the bot using keys WASDX
 
 ## How to see lidar data in Rviz on computer from bot
-TODO
+1. Setup X11 in SSH
+    - ```sudo apt install x11-apps```
+    - This will install necessary packages to allow X11 apps
