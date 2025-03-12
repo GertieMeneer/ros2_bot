@@ -66,4 +66,4 @@ Followed [this](https://docs.ros.org/en/eloquent/Tutorials/Creating-Your-First-R
 1. Setup X11 in SSH
     - ```sudo apt install x11-apps```
     - This will install necessary packages to allow X11 apps
-    - Install libraries for lds 02 because lds 01 isn't the sensor we have yikes
+Install libraries for lds 02 because lds 01 isn't the sensor we have yikes
