@@ -62,8 +62,18 @@ Followed [this](https://docs.ros.org/en/eloquent/Tutorials/Creating-Your-First-R
 6. Run ```ros2 run turtlebot3_teleop teleop_keyboard```
 7. Control the bot using keys WASDX
 
-## How to see lidar data in Rviz on computer from bot
+## How to see lidar data in rviz on computer from bot
+Install libraries for lds 02 because lds 01 isn't the sensor we have yikes
+
 1. Setup X11 in SSH
     - ```sudo apt install x11-apps```
     - This will install necessary packages to allow X11 apps
-2. Install libraries for lds 02 because lds 01 isn't the sensor we have yikes
+2. SSH into the bot using ```ssh -X ...```
+    - This will SSH into the bot using X11 forwarding
+    - X11 forwarding allows you to run GUI applications on a remote server while displaying them on your local machine
+3. Run ```export TURTLEBOT3_MODEL=burger```
+4. Run ```ros2 launch turtlebot3_cartographer cartographer.launch.py```
+    - This will launch rviz via X11 on local machine
+5. Change rviz settings
+    - Set ```Fixed Frame``` to ```base_scan```
+    - ```Laser Scan``` --> ```reliability```: set to ```best effort```
