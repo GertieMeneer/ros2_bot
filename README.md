@@ -86,9 +86,9 @@ Install libraries for lds 02 because lds 01 isn't the sensor we have yikes
 5. Run ```ros2 launch turtlebot3_cartographer cartographer.launch.py```
 6. Open a new terminal
 7. Run ```ssh -X ubuntu@{IP_ADDRESS_OF_RASPBERRY_PI}```
-8. ros2 run turtlebot3_teleop teleop_keyboard
+8. Run ```ros2 run turtlebot3_teleop teleop_keyboard```
 9. Drive around with the bot using the teleop keys
 10. CTRL C out of the teleop terminal
-11. ros2 run nav2_map_server map_saver_cli -f ~/map
-12. ros2 launch turtlebot3_navigation2 navigation2.launch.py map:=$HOME/map.yaml
+11. Run ```ros2 run nav2_map_server map_saver_cli -f ~/map```
+12. Run ```ros2 launch turtlebot3_navigation2 navigation2.launch.py map:=$HOME/map.yaml```
 13. Rviz will start running and when setting a goal by using the button at the top of Rviz the bot drives to the set goal
