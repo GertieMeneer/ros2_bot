@@ -99,3 +99,6 @@ Fix was to install ubuntu on VM.
 
 When install turtlebot3 there is a commando ```rm -r turtlebot3_cartographer turtlebot3_navigation2``` this uninstalls the cartographer and the navigation. Making the bot not able to use SLAM.
 Fix do not run this commando so it's not removed so SLAM works.
+
+Not able to let bot drive to a goal point.
+Fix run the navigation node with -X and place a point on the map using Nav2 goal button.
