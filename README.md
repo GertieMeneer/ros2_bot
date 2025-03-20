@@ -92,3 +92,10 @@ Install libraries for lds 02 because lds 01 isn't the sensor we have yikes
 11. Run ```ros2 run nav2_map_server map_saver_cli -f ~/map```
 12. Run ```ros2 launch turtlebot3_navigation2 navigation2.launch.py map:=$HOME/map.yaml```
 13. Rviz will start running and when setting a goal by using the button at the top of Rviz the bot drives to the set goal
+
+## Problems we faced during the project
+WSL not working with ssh into bot.
+Fix was to install ubuntu on VM.
+
+When install turtlebot3 there is a commando ```rm -r turtlebot3_cartographer turtlebot3_navigation2``` this uninstalls the cartographer and the navigation. Making the bot not able to use SLAM.
+Fix do not run this commando so it's not removed so SLAM works.
