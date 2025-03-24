@@ -1,4 +1,5 @@
 import rclpy
+import time
 
 from rclpy.node import Node
 from std_msgs.msg import Float32
@@ -8,7 +9,7 @@ LED_COUNT = 8
 LED_PIN = 12
 LED_FREQ_HZ = 800000
 LED_DMA = 10
-LED_BRIGHTNESS = 255        #0-255
+LED_BRIGHTNESS = 25        #0-255
 LED_INVERT = False 
 LED_CHANNEL = 0
 
@@ -17,13 +18,35 @@ class LedNode(Node):
         super().__init__('led_node')
         self.strip = PixelStrip(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
         self.strip.begin()
-        self.percentage = 0
+        
+        self.startup_animation()
 
         self.subscription = self.create_subscription(
             Float32,
             '/percentage',
             self.percentage_callback,
             10)
+
+    def startup_animation(self):
+        for i in range(LED_COUNT):
+            self.strip.setPixelColor(i, Color(255, 255, 255))
+            self.strip.show()
+            time.sleep(0.2)
+
+        for i in range(LED_COUNT):
+            self.strip.setPixelColor(i, Color(0, 0, 0))
+            self.strip.show()
+            time.sleep(0.2)
+
+        for _ in range(2):
+            for i in range(LED_COUNT):
+                self.strip.setPixelColor(i, Color(255, 255, 255))
+            self.strip.show()
+            time.sleep(0.5)
+            for i in range(LED_COUNT):
+                self.strip.setPixelColor(i, Color(0, 0, 0))
+            self.strip.show()
+            time.sleep(0.5)
 
     def percentage_callback(self, msg):
         self.percentage = msg.data
@@ -41,7 +64,6 @@ class LedNode(Node):
                 self.strip.setPixelColor(i, Color(0, 0, 0))
         self.strip.show()
 
-    
 def main(args=None):
     rclpy.init(args=args)
     node = LedNode()
