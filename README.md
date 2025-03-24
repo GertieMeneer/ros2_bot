@@ -78,7 +78,7 @@ Install libraries for lds 02 because lds 01 isn't the sensor we have yikes
     - Set ```Fixed Frame``` to ```base_scan```
     - ```Laser Scan``` --> ```reliability```: set to ```best effort```
   
-## How to make bot drive to 2D goal 
+## How to make bot drive to a 2D goal 
 1. Run ```ssh ubuntu@{IP_ADDRESS_OF_RASPBERRY_PI}```
 2. Run ```ros2 launch turtlebot3_bringup robot.launch.py```
 3. Open a new terminal
@@ -94,11 +94,11 @@ Install libraries for lds 02 because lds 01 isn't the sensor we have yikes
 13. Rviz will start running and when setting a goal by using the button at the top of Rviz the bot drives to the set goal
 
 ## Problems we faced during the project
-WSL not working with ssh into bot.
-Fix was to install ubuntu on VM.
+- WSL not working with ssh -X into bot.<br>
+WSL has support for running X11 apps (GUI) on Windows, but that only works when you run native Linux in WSL, not while SSH using -X into Ubuntu running on the Raspberry. We tried to solve this by looking for ways to forward -X somehow, and it did end up kind off working, but we still got errors and Rviz still did not want to launch. So we stopped using WSL and switched back to Ubuntu in a VM.
 
-When install turtlebot3 there is a commando ```rm -r turtlebot3_cartographer turtlebot3_navigation2``` this uninstalls the cartographer and the navigation. Making the bot not able to use SLAM.
-Fix do not run this commando so it's not removed so SLAM works.
+- Not being able to see the map in Rviz<br>
+After using the documentation we were still unable to see the actual map inside Rviz. We spent quite some time to troubleshoot this, by changing settings in Rviz that have to do with the LaserScan, and map settings. Eventually we found out that there's a command in the documentation that goes ```rm -r turtlebot3_cartographer turtlebot3_navigation2```. This actually removes necessary code that we need to see the map in Rviz. After reinstalling everything and not executing the remove command, we were able to see the map in Rviz.
 
 Not able to let bot drive to a goal point.
 Fix run the navigation node with -X and place a point on the map using Nav2 goal button.
