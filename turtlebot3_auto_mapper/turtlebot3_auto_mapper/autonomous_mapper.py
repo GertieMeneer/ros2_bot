@@ -71,8 +71,8 @@ class AutonomousMapper(Node):
         self.get_logger().info(f'Mapped area: {self.mapped_percentage:.2f}%')
 
         self.exploring = False
-        self.explore()  # Move to the next point
-
+        self.explore()
+        
 def main(args=None):
     rclpy.init(args=args)
     node = AutonomousMapper()
