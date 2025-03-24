@@ -97,8 +97,11 @@ Install libraries for lds 02 because lds 01 isn't the sensor we have yikes
 - WSL not working with ssh -X into bot.<br>
 WSL has support for running X11 apps (GUI) on Windows, but that only works when you run native Linux in WSL, not while SSH using -X into Ubuntu running on the Raspberry. We tried to solve this by looking for ways to forward -X somehow, and it did end up kind off working, but we still got errors and Rviz still did not want to launch. So we stopped using WSL and switched back to Ubuntu in a VM.
 
-- Not being able to see the map in Rviz<br>
+- Not being able to see the map in Rviz.<br>
 After using the documentation we were still unable to see the actual map inside Rviz. We spent quite some time to troubleshoot this, by changing settings in Rviz that have to do with the LaserScan, and map settings. Eventually we found out that there's a command in the documentation that goes ```rm -r turtlebot3_cartographer turtlebot3_navigation2```. This actually removes necessary code that we need to see the map in Rviz. After reinstalling everything and not executing the remove command, we were able to see the map in Rviz.
 
-Not able to let bot drive to a goal point.
+- Not able to let bot drive to a goal point.<br>
 Fix run the navigation node with -X and place a point on the map using Nav2 goal button.
+
+- Not able to use Python library to read pins of the Raspberry Pi.<br>
+Fix run the node with sudo by '''sudo -s'''
