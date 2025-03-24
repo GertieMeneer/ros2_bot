@@ -104,4 +104,4 @@ After using the documentation we were still unable to see the actual map inside 
 Fix run the navigation node with -X and place a point on the map using Nav2 goal button.
 
 - Not able to use Python library to read pins of the Raspberry Pi.<br>
-Fix run the node with sudo by '''sudo -s'''
+Fix run the node with sudo by ```sudo -s```
