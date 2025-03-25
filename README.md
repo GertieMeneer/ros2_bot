@@ -93,6 +93,15 @@ Install libraries for lds 02 because lds 01 isn't the sensor we have yikes
 12. Run ```ros2 launch turtlebot3_navigation2 navigation2.launch.py map:=$HOME/map.yaml```
 13. Rviz will start running and when setting a goal by using the button at the top of Rviz the bot drives to the set goal
 
+## How to run end product
+1. ssh into the turtlebot3 ```ssh turtle@<ip>```
+2. Run ```ros2 launch turtlebot3_bringup robot.launch.py```
+3. Run ```ros2 launch turtlebot3_cartographer cartographer.launch.py```
+4. Run ```ros2 launch turtlebot3_navigation2 navigation2.launch.py
+5. Run ```ros2 run ldr_node ldr_node```
+6. Run ```ros2 run led_node led_node```
+7. Run ```ros2 run turtlebot3_auto_mapper autonomous_mapper```
+
 ## Problems we faced during the project
 - WSL not working with ssh -X into bot.<br>
 WSL has support for running X11 apps (GUI) on Windows, but that only works when you run native Linux in WSL, not while SSH using -X into Ubuntu running on the Raspberry. We tried to solve this by looking for ways to forward -X somehow, and it did end up kind off working, but we still got errors and Rviz still did not want to launch. So we stopped using WSL and switched back to Ubuntu in a VM.
