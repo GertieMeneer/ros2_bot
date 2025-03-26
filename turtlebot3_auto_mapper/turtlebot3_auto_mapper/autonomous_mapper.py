@@ -4,13 +4,14 @@ from rclpy.action import ActionClient
 from nav2_msgs.action import NavigateToPose
 from nav_msgs.msg import OccupancyGrid
 from geometry_msgs.msg import PoseStamped
-from std_msgs.msg import Float32, Int32
+from std_msgs.msg import Float32, Int32, Bool
 
 class AutonomousMapper(Node):
     def __init__(self):
         super().__init__('autonomous_mapper')
         self.map_sub = self.create_subscription(OccupancyGrid, '/map', self.map_callback, 10)
         self.ldr_sub = self.create_subscription(Int32, '/ldr', self.ldr_callback, 10)
+        self.navigation_brightest_point_sub = self.create_publisher(Bool, '/navigating_to_brightest_point', 10)
         self.percentage_pub = self.create_publisher(Float32, '/percentage', 10)
         self.nav_client = ActionClient(self, NavigateToPose, 'navigate_to_pose')
         
@@ -79,17 +80,17 @@ class AutonomousMapper(Node):
         self.get_logger().info('Goal reached')
 
         if not self.lowest_ldr_found:
-        	if self.ldr_value is not None:
-            	self.ldr_values_list.append(self.ldr_value)
-            	self.get_logger().info(f'LDR Value at goal: {self.ldr_value}')
-        	else:
-            	self.ldr_values_list.append(None)
-            	self.get_logger().info('LDR Value not available')
+            if self.ldr_value is not None:
+                self.ldr_values_list.append(self.ldr_value)
+                self.get_logger().info(f'LDR Value at goal: {self.ldr_value}')
+            else:
+                self.ldr_values_list.append(None)
+                self.get_logger().info('LDR Value not available')
 
-        	self.current_cell += 1
-        	self.mapped_percentage = (self.current_cell / (self.grid_size * self.grid_size)) * 100
-        	self.percentage_pub.publish(Float32(data=self.mapped_percentage))
-        	self.get_logger().info(f'Mapped area: {self.mapped_percentage:.2f}%')
+            self.current_cell += 1
+            self.mapped_percentage = (self.current_cell / (self.grid_size * self.grid_size)) * 100
+            self.percentage_pub.publish(Float32(data=self.mapped_percentage))
+            self.get_logger().info(f'Mapped area: {self.mapped_percentage:.2f}%')
 
         self.exploring = False
         self.explore()
@@ -105,8 +106,11 @@ class AutonomousMapper(Node):
         min_goal_location = self.goals_list[min_index]
 
         self.get_logger().info(f'Lowest LDR Value: {min_ldr_value} at Location: {min_goal_location}')
-
         self.get_logger().info(f'Sending bot to the lowest LDR location: {min_goal_location}')
+        
+        msg = Bool()
+        msg.data = True
+        self.navigation_brightest_point_sub.publish(msg)
         
         goal_pose = PoseStamped()
         goal_pose.header.frame_id = 'map'
