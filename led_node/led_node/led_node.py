@@ -109,15 +109,34 @@ class LedNode(Node):
         for i in range(LED_COUNT):
             self.strip.setPixelColor(i, Color(255, 255, 255))
             self.strip.show()
-            time.sleep(0.2)
+            time.sleep(0.1)
         
+        for i in range(LED_COUNT):
+            self.strip.setPixelColor(i, Color(0, 0, 255))
+            self.strip.show()
+            time.sleep(0.1)
+
         for i in range(LED_COUNT):
             self.strip.setPixelColor(i, Color(0, 0, 0))
             self.strip.show()
-            time.sleep(0.2)
+            time.sleep(0.1)
 
     def stop_animation(self):
         self.get_logger().info("Navigation finished")
+        while True:
+            for i in range(101):
+                blue_value = int(255 * (i / 100))
+                for j in range(LED_COUNT):
+                    self.strip.setPixelColor(j, Color(0, 0, blue_value))
+                self.strip.show()
+                time.sleep(0.001)
+            
+            for i in range(100, -1, -1):
+                blue_value = int(255 * (i / 100))
+                for j in range(LED_COUNT):
+                    self.strip.setPixelColor(j, Color(0, 0, blue_value))
+                self.strip.show()
+                time.sleep(0.001)
 
     def test_led_progression(self):
         for percentage in range(0, 101, 1):
