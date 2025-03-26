@@ -20,6 +20,8 @@ class LedNode(Node):
         super().__init__('led_node')
         self.strip = PixelStrip(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
         self.strip.begin()
+
+        # self.test_led_progression()
         
         self.startup_animation()
 
@@ -29,34 +31,14 @@ class LedNode(Node):
         self.navigation_subscription = self.create_subscription(Bool, '/navigating_to_brightest_point', self.navigation_started_callback, 10)
 
         self.navigating = False
+        self.finished_navigating = False
         self.last_pose = None
         self.distance_driven = 0.0
         self.distance_remaining = 0.0
         self.initial_distance = 0.0
-
-    def startup_animation(self):
-        for i in range(LED_COUNT):
-            self.strip.setPixelColor(i, Color(255, 255, 255))
-            self.strip.show()
-            time.sleep(0.2)
-
-        for i in range(LED_COUNT):
-            self.strip.setPixelColor(i, Color(0, 0, 0))
-            self.strip.show()
-            time.sleep(0.2)
-
-        for _ in range(2):
-            for i in range(LED_COUNT):
-                self.strip.setPixelColor(i, Color(255, 255, 255))
-            self.strip.show()
-            time.sleep(0.5)
-            for i in range(LED_COUNT):
-                self.strip.setPixelColor(i, Color(0, 0, 0))
-            self.strip.show()
-            time.sleep(0.5)
     
     def navigation_started_callback(self, msg):
-        self.get_logger().info(f'nav to brightest point started')
+        self.get_logger().info(f'Navigation to brightest point started')
         self.navigating = msg.data
         if self.navigating:
             self.distance_driven = 0.0
@@ -91,11 +73,16 @@ class LedNode(Node):
         return total_distance
 
     def update_navigation_progress(self):
+        if self.finished_navigating is True: return
         if self.initial_distance > 0:
             progress_percentage = (self.distance_driven / self.initial_distance) * 100
             progress_percentage = min(100, max(0, progress_percentage))
             self.get_logger().info(f'Navigation progress: {progress_percentage:.2f}%')
             self.set_led(progress_percentage)
+            if progress_percentage is 100:
+                self.finished_navigating = True
+                time.sleep(3)
+                self.stop_animation()
 
     def percentage_callback(self, msg):
         if not self.navigating:
@@ -109,10 +96,37 @@ class LedNode(Node):
 
         for i in range(LED_COUNT):
             if i < leds_to_turn_on:
-                self.strip.setPixelColor(i, Color(255, 255, 255))
+                red = int(max(0, 255 * (1 - percentage / 100)))
+                green = int(max(0, 255 * (percentage / 100)))
+                color = Color(red, green, 0)
+                self.strip.setPixelColor(i, color)
             else:
                 self.strip.setPixelColor(i, Color(0, 0, 0))
+
         self.strip.show()
+    
+    def startup_animation(self):
+        for i in range(LED_COUNT):
+            self.strip.setPixelColor(i, Color(255, 255, 255))
+            self.strip.show()
+            time.sleep(0.2)
+        
+        for i in range(LED_COUNT):
+            self.strip.setPixelColor(i, Color(0, 0, 0))
+            self.strip.show()
+            time.sleep(0.2)
+
+    def stop_animation(self):
+        self.get_logger().info("Navigation finished")
+
+    def test_led_progression(self):
+        for percentage in range(0, 101, 1):
+            self.set_led(percentage)
+            print(f"LED set to {percentage}%")
+            time.sleep(0.5)
+        
+        self.set_led(0)
+        print("LED test complete")
 
 def main(args=None):
     rclpy.init(args=args)
