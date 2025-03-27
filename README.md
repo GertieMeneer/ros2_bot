@@ -97,7 +97,7 @@ Install libraries for lds 02 because lds 01 isn't the sensor we have yikes
 1. ssh into the turtlebot3 ```ssh turtle@<ip>```
 2. Run ```ros2 launch turtlebot3_bringup robot.launch.py```
 3. Run ```ros2 launch turtlebot3_cartographer cartographer.launch.py```
-4. Run ```ros2 launch turtlebot3_navigation2 navigation2.launch.py
+4. Run ```ros2 launch turtlebot3_navigation2 navigation2.launch.py```
 5. Run ```ros2 run ldr_node ldr_node```
 6. Run ```ros2 run led_node led_node```
 7. Run ```ros2 run turtlebot3_auto_mapper autonomous_mapper```
