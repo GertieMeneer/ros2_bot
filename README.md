@@ -102,6 +102,9 @@ Install libraries for lds 02 because lds 01 isn't the sensor we have yikes
 6. Run ```ros2 run led_node led_node```
 7. Run ```ros2 run turtlebot3_auto_mapper autonomous_mapper```
 
+### ROS graph
+![image](readme_attributes/rosgraph.png)
+
 ## Problems we faced during the project
 - WSL not working with ssh -X into bot.<br>
 WSL has support for running X11 apps (GUI) on Windows, but that only works when you run native Linux in WSL, not while SSH using -X into Ubuntu running on the Raspberry. We tried to solve this by looking for ways to forward -X somehow, and it did end up kind off working, but we still got errors and Rviz still did not want to launch. So we stopped using WSL and switched back to Ubuntu in a VM.
